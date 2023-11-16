@@ -11,7 +11,7 @@ type Entity struct {
 	TeacherName   string           `json:"teacher_name"`
 	TeacherNumber string           `json:"teacher_number" gorm:"unique"`
 	SubjectID     string           `json:"subject_id"`
-	Students      []student.Entity `json:"students" gorm:"many2many:teacher_students;foreignKey:ID;joinForeignKey:TeacherId;constraint:OnUpdate:CASCADE;"`
+	Students      []student.Entity `json:"students" gorm:"many2many:teacher_students;foreignKey:ID;joinForeignKey:TeacherId;References:ID;joinReferences:StudentId;constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
 	CreatedAt     time.Time        `json:"created_at"`
 	UpdatedAt     time.Time        `json:"updated_at"`
 }
