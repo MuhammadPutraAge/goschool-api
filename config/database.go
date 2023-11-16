@@ -4,6 +4,9 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/muhammadputraage/goschool-api/student"
+	"github.com/muhammadputraage/goschool-api/subject"
+	"github.com/muhammadputraage/goschool-api/teacher"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -31,5 +34,10 @@ func ConnectDB() {
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic("Failed to connect database")
+	}
+
+	err = DB.AutoMigrate(&subject.Entity{}, &teacher.Entity{}, &student.Entity{})
+	if err != nil {
+		panic("Failed to migrate database")
 	}
 }
